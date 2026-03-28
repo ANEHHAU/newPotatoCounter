@@ -1,0 +1,47 @@
+model:
+  path: "C:/Users/maitr/Downloads/potato_counter/best2.pt"
+  confidence_threshold: 0.45
+  iou_threshold: 0.5
+  device: "auto"  # auto | cpu | cuda:0
+
+video:
+  default_source: 0   # 0=camera, or path to file
+  processing_fps: 30
+  queue_max_depth: 3
+
+pipeline:
+  mode: "good_defect"   # good_defect | full_class
+  enable_clahe: true
+  enable_background_removal: false
+  brightness: 0
+  contrast: 1.0
+  blur_kernel: 0
+
+zones:
+  roi: []              # list of [x, y] points (normalized 0-1)
+  define_zone: []
+  counting_line: []    # [[x1,y1], [x2,y2]]
+
+tracking:
+  max_lost_frames: 30
+  min_confidence_to_track: 0.35
+  finalize_min_frames: 3
+  finalize_unknown_gap: 0.08
+
+conveyor:
+  calibrated: false
+  mm_per_pixel: 1.0
+
+database:
+  path: "potato_qc.db"
+  save_snapshots: true
+  snapshot_quality: 85
+
+alarms:
+  defect_rate_threshold: 0.10
+
+ui:
+  theme: "dark"
+  window_title: "Potato QC Inspector"
+  show_track_ids: true
+  show_confidence: true
